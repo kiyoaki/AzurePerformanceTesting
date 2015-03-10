@@ -8,10 +8,19 @@ using Dapper;
 
 namespace AzureSqlDatabaseStressTestTool.Controllers
 {
+    [RequireHttps]
     public class TestingController : Controller
     {
         // GET: Testing
-        public ActionResult Index(
+        [HttpGet]
+        public ActionResult Index()
+        {
+            ViewBag.StatusMessage = "Please input ConnectionString";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Start(
             string connectionString,
             string table,
             int writeCount = 10000,
@@ -20,8 +29,8 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
         {
             if (string.IsNullOrEmpty(connectionString))
             {
-                ViewBag.StatusMessage = "Input ConnectionString";
-                return View();
+                ViewBag.StatusMessage = "Please input ConnectionString";
+                return View("Index");
             }
 
             if (string.IsNullOrWhiteSpace(table))
@@ -105,7 +114,7 @@ DROP TABLE [dbo].[{0}];", table);
             }, TaskContinuationOptions.OnlyOnFaulted);
 
             ViewBag.StatusMessage = "Start Testing... Trace at Azure Websites streaming log.";
-            return View();
+            return View("Index");
         }
     }
 

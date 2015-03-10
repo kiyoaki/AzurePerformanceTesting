@@ -14,6 +14,12 @@ namespace AzureSqlDatabaseStressTestTool
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Testing", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.Add(new Route("Testing/Index", new MvcRouteHandler())
+            {
+                Defaults = new RouteValueDictionary(new { controller = "Testing", action = "Index" }),
+                DataTokens = new RouteValueDictionary(new { scheme = "https" })
+            });
         }
     }
 }
