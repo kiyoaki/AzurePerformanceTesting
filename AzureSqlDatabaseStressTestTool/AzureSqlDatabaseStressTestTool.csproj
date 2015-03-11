@@ -43,9 +43,17 @@
       <HintPath>..\packages\Dapper.1.38\lib\net45\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\packages\StackExchange.Redis.1.0.394\lib\net45\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -162,12 +170,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\TestingController.cs" />
+    <Compile Include="TestingDbAdapters\DapperAdapter.cs" />
+    <Compile Include="TestingDbAdapters\StackExchangeRedisAdapter.cs" />
+    <Compile Include="TestingDbAdapters\EntityFrameworkAdapter.cs" />
+    <Compile Include="TestingDbAdapters\ITestingDbAdapters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="TestingDbAdapters\Testing.cs" />
+    <Compile Include="TestingDbAdapters\TestingConstants.cs" />
+    <Compile Include="TestingDbAdapters\TestingDbAdapterEnums.cs" />
+    <Compile Include="TestingDbAdapters\TestingDbAdapterFactory.cs" />
+    <Compile Include="TestingLogAdapters\ITestingLogAdapter.cs" />
+    <Compile Include="TestingLogAdapters\NLogAdapter.cs" />
+    <Compile Include="TestingLogAdapters\TestingLogAdapterFactory.cs" />
+    <Compile Include="TestingLogAdapters\TestingLogAdapterEnums.cs" />
+    <Compile Include="TestingLogAdapters\TraceLogAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -179,6 +200,12 @@
     <Content Include="robots.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\mshimizu - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mshimizu - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -216,6 +243,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -15,15 +15,22 @@
 @using (Html.BeginForm("Start", "Testing", FormMethod.Post))
 {
     <div class="form-group">
-        <span class="control-label">ConnectionString [Required]</span>
+        <span class="control-label">TestingType</span>
         <div>
-            @Html.TextBox("connectionString", null, new { @class = "form-control" })
+            @Html.DropDownList("adapterType", Enum.GetValues(typeof(TestingDbAdapterType))
+                .Cast<TestingDbAdapterType>()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.ToString(),
+                    Value = ((int)x).ToString()
+                }),
+                new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        <span class="control-label">TableName [Default:Testing Drop and Create]</span>
+        <span class="control-label">ConnectionString [Required]</span>
         <div>
-            @Html.TextBox("table", null, new { @class = "form-control" })
+            @Html.TextBox("connectionString", null, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -44,6 +51,18 @@
             @Html.TextBox("maxThreadCount", null, new { @class = "form-control" })
         </div>
     </div>
-
+    <div class="form-group">
+        <span class="control-label">LogType</span>
+        <div>
+            @Html.DropDownList("logAdapterType", Enum.GetValues(typeof(TestingLogAdapterType))
+                .Cast<TestingLogAdapterType>()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.ToString(),
+                    Value = ((int)x).ToString()
+                }),
+                new { @class = "form-control" })
+        </div>
+    </div>
     <button type="submit" class="btn btn-default" value="start" title="Start Testing">Start Testing</button>
 }
