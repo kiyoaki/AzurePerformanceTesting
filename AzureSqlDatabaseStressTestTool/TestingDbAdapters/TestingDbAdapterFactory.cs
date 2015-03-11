@@ -14,6 +14,9 @@ namespace AzureSqlDatabaseStressTestTool
                 case TestingDbAdapterType.EntityFramework:
                     return new EntityFrameworkAdapter(connectionString);
 
+                case TestingDbAdapterType.RawAdoNet:
+                    return new RawAdoNetAdapter(connectionString);
+
                 case TestingDbAdapterType.StackExchangeRedis:
                     return new StackExchangeRedisAdapter(connectionString);
 

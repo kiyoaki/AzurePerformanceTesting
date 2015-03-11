@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\TestingController.cs" />
+    <Compile Include="TestingDbAdapters\RawAdoNetAdapter.cs" />
     <Compile Include="TestingDbAdapters\DapperAdapter.cs" />
     <Compile Include="TestingDbAdapters\StackExchangeRedisAdapter.cs" />
     <Compile Include="TestingDbAdapters\EntityFrameworkAdapter.cs" />

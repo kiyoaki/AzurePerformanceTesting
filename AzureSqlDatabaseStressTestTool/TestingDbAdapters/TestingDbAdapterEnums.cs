@@ -4,6 +4,8 @@
     {
         Dapper = 0,
         EntityFramework = 10,
-        StackExchangeRedis = 20
+        RawAdoNet = 20,
+        StackExchangeRedis = 100,
+        
     }
 }
