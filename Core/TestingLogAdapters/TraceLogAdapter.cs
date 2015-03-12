@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingLogAdapters
 {
     public class TraceLogAdapter : ITestingLogAdapter
     {

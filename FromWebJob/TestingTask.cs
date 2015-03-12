@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using AzureSqlDatabaseStressTestTool;
+using Core;
+using Core.TestingDbAdapters;
+using Core.TestingLogAdapters;
 using Microsoft.Azure.WebJobs;
 
 namespace FromBatch
@@ -19,49 +21,12 @@ namespace FromBatch
         [NoAutomaticTrigger]
         public static void Run()
         {
-            var adapter = TestingDbAdapterFactory.Create(AdapterType, ConnectionString, WriteCount);
             var logger = TestingLogAdapterFactory.Create(LogAdapterType);
 
             try
             {
-                adapter.DropAndCreateTable();
-
-                logger.Info("Start connectionString: " + ConnectionString);
-
-                var stopwatch = Stopwatch.StartNew();
-                Parallel.ForEach(Enumerable.Range(1, WriteCount), new ParallelOptions
-                {
-                    MaxDegreeOfParallelism = MaxThreadCount
-                }, i =>
-                {
-                    var threadId = Environment.CurrentManagedThreadId;
-                    adapter.Insert(new Testing
-                    {
-                        Name = TestingConstants.RedisKeyPrefix + i,
-                        TreadId = threadId,
-                        AddTime = DateTime.Now
-                    });
-                });
-
-                stopwatch.Stop();
-
-                logger.Info("{0}rows written in {1}ms", WriteCount, stopwatch.ElapsedMilliseconds);
-
-                stopwatch.Restart();
-
-                Parallel.ForEach(Enumerable.Range(1, ReadCount), new ParallelOptions
-                {
-                    MaxDegreeOfParallelism = MaxThreadCount
-                }, i =>
-                {
-                    var a = adapter.Select();
-                });
-
-                stopwatch.Stop();
-
-                logger.Info("{0}rows read in {1}ms", ReadCount, stopwatch.ElapsedMilliseconds);
-
-                stopwatch.Reset();
+                TestFunctions.WriteAndReadDatabase(AdapterType, ConnectionString,
+                    WriteCount, ReadCount, MaxThreadCount, logger);
             }
             catch (Exception ex)
             {

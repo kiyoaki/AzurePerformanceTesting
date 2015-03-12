@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingLogAdapters
 {
     public class ConsoleLogAdapter : ITestingLogAdapter
     {

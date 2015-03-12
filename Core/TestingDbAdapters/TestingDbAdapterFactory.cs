@@ -1,7 +1,6 @@
 ﻿using System;
-using Core.TestingDbAdapters;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingDbAdapters
 {
     public static class TestingDbAdapterFactory
     {

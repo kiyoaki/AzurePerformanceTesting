@@ -1,7 +1,7 @@
 ﻿using System;
 using StackExchange.Redis;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingDbAdapters
 {
     public class NoSerializingStackExchangeRedisAdapter : TestingDbAdapter
     {

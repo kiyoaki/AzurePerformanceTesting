@@ -1,6 +1,6 @@
 ﻿using NLog;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingLogAdapters
 {
     public class NLogAdapter : ITestingLogAdapter
     {

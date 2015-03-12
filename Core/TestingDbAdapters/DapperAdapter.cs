@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingDbAdapters
 {
     public class DapperAdapter : TestingDbAdapter
     {

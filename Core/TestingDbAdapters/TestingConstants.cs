@@ -1,4 +1,4 @@
-﻿namespace AzureSqlDatabaseStressTestTool
+﻿namespace Core.TestingDbAdapters
 {
     public static class TestingConstants
     {

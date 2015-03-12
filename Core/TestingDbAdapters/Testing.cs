@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using ProtoBuf;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingDbAdapters
 {
     [Table("Testing")]
     [ProtoContract]

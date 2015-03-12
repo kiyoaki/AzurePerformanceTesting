@@ -2,7 +2,7 @@
 using Core.Serializers;
 using StackExchange.Redis;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingDbAdapters
 {
     public class StackExchangeRedisAdapter : TestingDbAdapter
     {

@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingDbAdapters
 {
     public class EntityFrameworkAdapter : TestingDbAdapter
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AzureSqlDatabaseStressTestTool
+namespace Core.TestingLogAdapters
 {
     public class TextWriterLogAdapter : ITestingLogAdapter
     {

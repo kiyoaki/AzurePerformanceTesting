@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SqlClient;
-using AzureSqlDatabaseStressTestTool;
 
 namespace Core.TestingDbAdapters
 {

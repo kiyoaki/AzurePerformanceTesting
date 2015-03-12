@@ -1,4 +1,4 @@
-﻿namespace AzureSqlDatabaseStressTestTool
+﻿namespace Core.TestingLogAdapters
 {
     public enum TestingLogAdapterType
     {
