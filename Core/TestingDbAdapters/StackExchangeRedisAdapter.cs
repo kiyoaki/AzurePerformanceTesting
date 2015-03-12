@@ -6,13 +6,15 @@ namespace AzureSqlDatabaseStressTestTool
 {
     public class StackExchangeRedisAdapter : TestingDbAdapter
     {
+        private readonly int _writeCount;
         private static readonly ISerializer Serializer = SerializerFactory.Create(SerializerType.ProtocolBuffers);
         private static volatile int _counter;
         private readonly ConnectionMultiplexer _connection;
 
-        public StackExchangeRedisAdapter(string connectionString)
+        public StackExchangeRedisAdapter(string connectionString, int writeCount)
             : base(connectionString)
         {
+            _writeCount = writeCount;
             _connection = ConnectionMultiplexer.Connect(connectionString);
         }
 
@@ -28,6 +30,11 @@ namespace AzureSqlDatabaseStressTestTool
             var json = Serializer.Serialize(entity);
             var key = TestingConstants.RedisKeyPrefix + entity.Id;
             db.StringSet(key, json);
+
+            if (_counter >= _writeCount)
+            {
+                _counter = 0;
+            }
         }
 
         public override Testing Select()

@@ -22,7 +22,7 @@ namespace AzureSqlDatabaseStressTestTool
                     return new BulkCopyAdapter(connectionString, writeCount);
 
                 case TestingDbAdapterType.StackExchangeRedis:
-                    return new StackExchangeRedisAdapter(connectionString);
+                    return new StackExchangeRedisAdapter(connectionString, writeCount);
 
                 default:
                     throw new InvalidOperationException(adapterType + " is not implemented.");
