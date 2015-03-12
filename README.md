@@ -1,11 +1,10 @@
-# AzureSqlDatabaseStressTestTool
-
+# AzurePerformanceTesting
 
 ### Testing results
 
-#### Azure Websites size
+#### Azure Websites
 ```
-Azure Websites Standard L size
+Standard L size
 ```
 
 #### S2(50DTU) EntityFramework
