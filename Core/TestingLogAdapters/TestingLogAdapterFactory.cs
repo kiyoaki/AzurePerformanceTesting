@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
 
 namespace AzureSqlDatabaseStressTestTool
 {
     public static class TestingLogAdapterFactory
     {
-        public static ITestingLogAdapter Create(TestingLogAdapterType adapterType)
+        public static ITestingLogAdapter Create(TestingLogAdapterType adapterType, TextWriter writer = null)
         {
             switch (adapterType)
             {
@@ -13,6 +14,12 @@ namespace AzureSqlDatabaseStressTestTool
 
                 case TestingLogAdapterType.NLog:
                     return new NLogAdapter();
+
+                case TestingLogAdapterType.TextWriter:
+                    return new TextWriterLogAdapter(writer);
+
+                case TestingLogAdapterType.Console:
+                    return new ConsoleLogAdapter();
 
                 default:
                     throw new InvalidOperationException(adapterType + " is not implemented.");

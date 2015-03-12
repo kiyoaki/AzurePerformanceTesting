@@ -75,10 +75,11 @@
     <Compile Include="TestingLogAdapters\NLogAdapter.cs" />
     <Compile Include="TestingLogAdapters\TestingLogAdapterEnums.cs" />
     <Compile Include="TestingLogAdapters\TestingLogAdapterFactory.cs" />
+    <Compile Include="TestingLogAdapters\ConsoleLogAdapter.cs" />
+    <Compile Include="TestingLogAdapters\TextWriterLogAdapter.cs" />
     <Compile Include="TestingLogAdapters\TraceLogAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
