@@ -32,7 +32,7 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
                 return View("Index");
             }
 
-            var adapter = TestingDbAdapterFactory.Create(adapterType, connectionString);
+            var adapter = TestingDbAdapterFactory.Create(adapterType, connectionString, writeCount);
             var logger = TestingLogAdapterFactory.Create(logAdapterType);
 
             var task = Task.Factory.StartNew(() =>

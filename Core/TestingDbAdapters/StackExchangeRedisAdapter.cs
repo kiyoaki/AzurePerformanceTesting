@@ -4,27 +4,28 @@ using StackExchange.Redis;
 
 namespace AzureSqlDatabaseStressTestTool
 {
-    public class StackExchangeRedisAdapter : ITestingDbAdapter
+    public class StackExchangeRedisAdapter : TestingDbAdapter
     {
         private readonly ConnectionMultiplexer _connection;
 
         public StackExchangeRedisAdapter(string connectionString)
+            : base(connectionString)
         {
             _connection = ConnectionMultiplexer.Connect(connectionString);
         }
 
-        public void DropAndCreateTable()
+        public override void DropAndCreateTable()
         {
         }
 
-        public void Insert(Testing entity)
+        public override void Insert(Testing entity)
         {
             var db = _connection.GetDatabase();
             var json = JsonConvert.SerializeObject(entity);
             db.StringSet(entity.Name, json);
         }
 
-        public Testing Select()
+        public override Testing Select()
         {
             var db = _connection.GetDatabase();
             var id = new Random().Next(100);

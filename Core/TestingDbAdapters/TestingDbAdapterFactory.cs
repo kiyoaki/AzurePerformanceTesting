@@ -1,10 +1,11 @@
 ﻿using System;
+using Core.TestingDbAdapters;
 
 namespace AzureSqlDatabaseStressTestTool
 {
     public static class TestingDbAdapterFactory
     {
-        public static ITestingDbAdapter Create(TestingDbAdapterType adapterType, string connectionString)
+        public static TestingDbAdapter Create(TestingDbAdapterType adapterType, string connectionString, int writeCount)
         {
             switch (adapterType)
             {
@@ -16,6 +17,9 @@ namespace AzureSqlDatabaseStressTestTool
 
                 case TestingDbAdapterType.RawAdoNet:
                     return new RawAdoNetAdapter(connectionString);
+
+                case TestingDbAdapterType.BulkCopy:
+                    return new BulkCopyAdapter(connectionString, writeCount);
 
                 case TestingDbAdapterType.StackExchangeRedis:
                     return new StackExchangeRedisAdapter(connectionString);

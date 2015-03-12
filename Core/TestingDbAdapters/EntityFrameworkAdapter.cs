@@ -4,53 +4,25 @@ using System.Linq;
 
 namespace AzureSqlDatabaseStressTestTool
 {
-    public class EntityFrameworkAdapter : ITestingDbAdapter
+    public class EntityFrameworkAdapter : TestingDbAdapter
     {
-        private readonly string _connectionString;
-
-        private static readonly string CreateTableSql =
-            string.Format(
-            @"CREATE TABLE [dbo].[{0}] (
-                [Id]      INT            IDENTITY (1, 1) NOT NULL,
-                [Name]    NVARCHAR (MAX) NULL,
-                [TreadId] INT            NOT NULL,
-                [AddTime] DATETIME       NOT NULL, 
-                CONSTRAINT [PK_Testing] PRIMARY KEY ([Id])
-            );", TestingConstants.TableName);
-
-        private static readonly string DropSql =
-            string.Format(
-            @"if exists (select * from sysobjects where id =
-            object_id(N'[dbo].[{0}]') and
-              OBJECTPROPERTY(id, N'IsUserTable') = 1)
-            DROP TABLE [dbo].[{0}];", TestingConstants.TableName);
-
         public EntityFrameworkAdapter(string connectionString)
+            : base(connectionString)
         {
-            _connectionString = connectionString;
         }
 
-        public void DropAndCreateTable()
+        public override void Insert(Testing entity)
         {
-            using (var db = new Entities(_connectionString))
-            {
-                db.Database.ExecuteSqlCommand(DropSql);
-                db.Database.ExecuteSqlCommand(CreateTableSql);
-            }
-        }
-
-        public void Insert(Testing entity)
-        {
-            using (var db = new Entities(_connectionString))
+            using (var db = new Entities(ConnectionString))
             {
                 db.Testing.Add(entity);
                 db.SaveChanges();
             }
         }
 
-        public Testing Select()
+        public override Testing Select()
         {
-            using (var db = new Entities(_connectionString))
+            using (var db = new Entities(ConnectionString))
             {
                 var id = new Random().Next(100);
                 return db.Testing.FirstOrDefault(x => x.Id == id);
