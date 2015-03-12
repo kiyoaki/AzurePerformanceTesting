@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Core;
 using Core.TestingDbAdapters;
 using Core.TestingLogAdapters;
@@ -33,17 +32,11 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
             }
 
             var logger = TestingLogAdapterFactory.Create(logAdapterType);
-            var task = Task.Factory.StartNew(() =>
-            {
-                TestFunctions.WriteAndReadDatabase(adapterType, connectionString, writeCount, readCount, maxThreadCount, logger);
-                ViewBag.StatusMessage = "Start Testing...";
-            });
-            task.ConfigureAwait(false);
-            task.ContinueWith(x =>
-            {
-                var message = x.Exception != null ? x.Exception.Message : "";
-                logger.Error("Exception: " + message);
-            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            TestFunctions.WriteAndReadDatabaseAsync(adapterType,
+                connectionString, writeCount, readCount, maxThreadCount, logger);
+
+            ViewBag.StatusMessage = "Start Testing...";
 
             return View("Index");
         }
