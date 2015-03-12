@@ -24,6 +24,9 @@ namespace AzureSqlDatabaseStressTestTool
                 case TestingDbAdapterType.StackExchangeRedis:
                     return new StackExchangeRedisAdapter(connectionString, writeCount);
 
+                case TestingDbAdapterType.NoSerializingStackExchangeRedis:
+                    return new NoSerializingStackExchangeRedisAdapter(connectionString);
+
                 default:
                     throw new InvalidOperationException(adapterType + " is not implemented.");
             }

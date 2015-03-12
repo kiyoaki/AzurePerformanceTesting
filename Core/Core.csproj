@@ -72,6 +72,7 @@
     <Compile Include="TestingDbAdapters\BulkCopyAdapter.cs" />
     <Compile Include="TestingDbAdapters\DapperAdapter.cs" />
     <Compile Include="TestingDbAdapters\EntityFrameworkAdapter.cs" />
+    <Compile Include="TestingDbAdapters\NoSerializingStackExchangeRedisAdapter.cs" />
     <Compile Include="TestingDbAdapters\TestingDbAdapter.cs" />
     <Compile Include="TestingDbAdapters\RawAdoNetAdapter.cs" />
     <Compile Include="TestingDbAdapters\StackExchangeRedisAdapter.cs" />

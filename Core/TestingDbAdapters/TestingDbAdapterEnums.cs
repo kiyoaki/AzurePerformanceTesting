@@ -7,5 +7,6 @@
         RawAdoNet = 20,
         BulkCopy = 30,
         StackExchangeRedis = 100,
+        NoSerializingStackExchangeRedis = 110
     }
 }
