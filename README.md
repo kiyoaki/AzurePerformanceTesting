@@ -1,7 +1,5 @@
 # AzurePerformanceTesting
 
-### Testing results
-
 #### Azure Websites (Standard L) to SQL Database
 
 ##### S2(50DTU) EntityFramework
