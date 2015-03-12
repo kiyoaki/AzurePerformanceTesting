@@ -19,7 +19,7 @@ namespace FromBatch
         [NoAutomaticTrigger]
         public static void Run()
         {
-            var adapter = TestingDbAdapterFactory.Create(AdapterType, ConnectionString);
+            var adapter = TestingDbAdapterFactory.Create(AdapterType, ConnectionString, WriteCount);
             var logger = TestingLogAdapterFactory.Create(LogAdapterType);
 
             try
@@ -37,7 +37,7 @@ namespace FromBatch
                     var threadId = Environment.CurrentManagedThreadId;
                     adapter.Insert(new Testing
                     {
-                        Name = TestingConstants.NamePrefix + i,
+                        Name = TestingConstants.RedisKeyPrefix + i,
                         TreadId = threadId,
                         AddTime = DateTime.Now
                     });

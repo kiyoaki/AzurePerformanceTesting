@@ -1,11 +1,12 @@
 ﻿using System;
-using Newtonsoft.Json;
+using Core.Serializers;
 using StackExchange.Redis;
 
 namespace AzureSqlDatabaseStressTestTool
 {
     public class StackExchangeRedisAdapter : TestingDbAdapter
     {
+        private static readonly ISerializer Serializer = SerializerFactory.Create(SerializerType.ProtocolBuffers);
         private static volatile int _counter;
         private readonly ConnectionMultiplexer _connection;
 
@@ -24,7 +25,7 @@ namespace AzureSqlDatabaseStressTestTool
             entity.Id = _counter++;
 
             var db = _connection.GetDatabase();
-            var json = JsonConvert.SerializeObject(entity);
+            var json = Serializer.Serialize(entity);
             var key = TestingConstants.RedisKeyPrefix + entity.Id;
             db.StringSet(key, json);
         }
@@ -35,7 +36,7 @@ namespace AzureSqlDatabaseStressTestTool
             var id = new Random().Next(100);
             var key = TestingConstants.RedisKeyPrefix + id;
             var json = (string)db.StringGet(key);
-            return string.IsNullOrEmpty(json) ? null : JsonConvert.DeserializeObject<Testing>(json);
+            return string.IsNullOrEmpty(json) ? null : Serializer.Deserialize<Testing>(json);
         }
     }
 }
