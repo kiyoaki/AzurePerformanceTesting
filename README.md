@@ -2,9 +2,9 @@
 
 ### Testing results
 
-#### Azure Websites
+#### Azure Websites to SQL Database
 ```
-Standard L size
+Websites size is Standard L
 ```
 
 #### S2(50DTU) EntityFramework
