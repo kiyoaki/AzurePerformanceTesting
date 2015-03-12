@@ -50,7 +50,7 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
                     var threadId = Environment.CurrentManagedThreadId;
                     adapter.Insert(new Testing
                     {
-                        Name = TestingConstants.NamePrefix + i,
+                        Name = TestingConstants.RedisKeyPrefix + i,
                         TreadId = threadId,
                         AddTime = DateTime.Now
                     });

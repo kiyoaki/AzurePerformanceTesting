@@ -6,6 +6,7 @@ namespace AzureSqlDatabaseStressTestTool
 {
     public class StackExchangeRedisAdapter : TestingDbAdapter
     {
+        private static volatile int _counter;
         private readonly ConnectionMultiplexer _connection;
 
         public StackExchangeRedisAdapter(string connectionString)
@@ -20,16 +21,19 @@ namespace AzureSqlDatabaseStressTestTool
 
         public override void Insert(Testing entity)
         {
+            entity.Id = _counter++;
+
             var db = _connection.GetDatabase();
             var json = JsonConvert.SerializeObject(entity);
-            db.StringSet(entity.Name, json);
+            var key = TestingConstants.RedisKeyPrefix + entity.Id;
+            db.StringSet(key, json);
         }
 
         public override Testing Select()
         {
             var db = _connection.GetDatabase();
             var id = new Random().Next(100);
-            var key = TestingConstants.NamePrefix + id;
+            var key = TestingConstants.RedisKeyPrefix + id;
             var json = (string)db.StringGet(key);
             return string.IsNullOrEmpty(json) ? null : JsonConvert.DeserializeObject<Testing>(json);
         }
