@@ -4,7 +4,6 @@
     {
         Trace = 0,
         NLog = 10,
-        TextWriter = 20,
-        Console = 30
+        Console = 20
     }
 }

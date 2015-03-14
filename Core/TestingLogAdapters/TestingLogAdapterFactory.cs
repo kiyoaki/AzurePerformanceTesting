@@ -5,7 +5,7 @@ namespace Core.TestingLogAdapters
 {
     public static class TestingLogAdapterFactory
     {
-        public static ITestingLogAdapter Create(TestingLogAdapterType adapterType, TextWriter writer = null)
+        public static ITestingLogAdapter Create(TestingLogAdapterType adapterType)
         {
             switch (adapterType)
             {
@@ -14,9 +14,6 @@ namespace Core.TestingLogAdapters
 
                 case TestingLogAdapterType.NLog:
                     return new NLogAdapter();
-
-                case TestingLogAdapterType.TextWriter:
-                    return new TextWriterLogAdapter(writer);
 
                 case TestingLogAdapterType.Console:
                     return new ConsoleLogAdapter();

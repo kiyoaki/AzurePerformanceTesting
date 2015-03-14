@@ -86,7 +86,6 @@
     <Compile Include="TestingLogAdapters\TestingLogAdapterEnums.cs" />
     <Compile Include="TestingLogAdapters\TestingLogAdapterFactory.cs" />
     <Compile Include="TestingLogAdapters\ConsoleLogAdapter.cs" />
-    <Compile Include="TestingLogAdapters\TextWriterLogAdapter.cs" />
     <Compile Include="TestingLogAdapters\TraceLogAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
