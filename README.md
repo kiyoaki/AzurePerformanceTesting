@@ -1,5 +1,37 @@
 # AzurePerformanceTesting
 
+#### Usage (from Azure Websites or Azure WebJob)
+Deploy FromWebsites or FromWebJob project.
+
+[Azure Websites documentation](http://azure.microsoft.com/en-us/documentation/services/websites/)
+
+#### Usage (execute from console)
+```
+AzurePerformanceTesting [ConnectionString] [AdapterType] [LogAdapterType] [WriteCount] [ReadCount] [MaxThreadCount]
+
+    ConnectionString [Required]
+
+    AdapterType [Default:Dapper]
+        Dapper:0
+        EntityFramework:10
+        RawAdoNet:20
+        BulkCopy:30
+        StackExchangeRedis:100
+        NoSerializingStackExchangeRedis:110
+
+    LogAdapterType [Default:Console]
+        Trace:0
+        NLog:10
+        TextWriter:20
+        Console:30
+
+    WriteCount [Default:10000]
+
+    ReadCount [Default:10000]
+
+    MaxThreadCount [Default:100]
+```
+
 #### Azure Websites (Standard L) to SQL Database
 
 ##### S2(50DTU) EntityFramework
