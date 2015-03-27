@@ -32,6 +32,14 @@ AzurePerformanceTesting [ConnectionString] [AdapterType] [LogAdapterType] [Write
     MaxThreadCount [Default:100]
 ```
 
+#### Azure Web Apps (P3) to SQL Database
+
+##### P3(800DTU) Raw ADO.NET
+```
+2015-03-27T18:41:07  PID[4064] Information 200000rows written in 40159ms
+2015-03-27T18:41:21  PID[4064] Information 200000rows read in 13892ms
+```
+
 #### Azure Websites (Standard L) to SQL Database
 
 ##### S2(50DTU) EntityFramework
