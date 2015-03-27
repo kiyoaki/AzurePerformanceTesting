@@ -94,4 +94,9 @@ AzurePerformanceTesting [ConnectionString] [AdapterType] [LogAdapterType] [Write
 ```
 2015-03-27T18:41:07  PID[4064] Information 200000rows written in 40159ms
 2015-03-27T18:41:21  PID[4064] Information 200000rows read in 13892ms
+
+Batch Requests/sec 15000
+avg_cpu_percent 23
+avg_log_write_percent 92.45
 ```
+
