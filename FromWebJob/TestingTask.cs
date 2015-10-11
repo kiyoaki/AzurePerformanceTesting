@@ -17,6 +17,7 @@ namespace FromBatch
         private const int WriteCount = 100000;
         private const int ReadCount = 100000;
         private const int MaxThreadCount = 100;
+        private const string TableName = TestingConstants.TableName;
 
         [NoAutomaticTrigger]
         public static void Run()
@@ -26,7 +27,7 @@ namespace FromBatch
             try
             {
                 TestFunctions.WriteAndReadDatabase(AdapterType, ConnectionString,
-                    WriteCount, ReadCount, MaxThreadCount, logger);
+                    WriteCount, ReadCount, MaxThreadCount, logger, TableName);
             }
             catch (Exception ex)
             {

@@ -202,6 +202,8 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\cloud9-performance-test.pubxml" />
+    <None Include="Properties\PublishProfiles\cloud9-performance-test2.pubxml" />
     <None Include="Properties\PublishProfiles\mshimizu - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mshimizu - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

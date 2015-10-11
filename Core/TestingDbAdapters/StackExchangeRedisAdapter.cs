@@ -18,7 +18,7 @@ namespace Core.TestingDbAdapters
             _connection = ConnectionMultiplexer.Connect(connectionString);
         }
 
-        public override void DropAndCreateTable()
+        public override void DropAndCreateTable(string tableName)
         {
         }
 

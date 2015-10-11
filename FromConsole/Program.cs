@@ -27,6 +27,7 @@ namespace FromConsole
             var writeCount = 10000;
             var readCount = 10000;
             var maxThreadCount = 100;
+            var tableName = TestingConstants.TableName;
 
             TestingDbAdapterType argsAdapterType;
             if (args.Length >= 2 && Enum.TryParse(args[1], out argsAdapterType))
@@ -63,7 +64,7 @@ namespace FromConsole
             try
             {
                 TestFunctions.WriteAndReadDatabase(adapterType, connectionString,
-                    writeCount, readCount, maxThreadCount, logger);
+                    writeCount, readCount, maxThreadCount, logger, tableName);
             }
             catch (Exception ex)
             {

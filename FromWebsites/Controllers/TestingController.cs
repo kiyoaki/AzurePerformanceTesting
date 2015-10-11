@@ -23,7 +23,8 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
             int writeCount = 10000,
             int readCount = 10000,
             int maxThreadCount = 20,
-            TestingLogAdapterType logAdapterType = TestingLogAdapterType.Trace)
+            TestingLogAdapterType logAdapterType = TestingLogAdapterType.Trace,
+            string tableName = TestingConstants.TableName)
         {
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -34,7 +35,7 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
             var logger = TestingLogAdapterFactory.Create(logAdapterType);
 
             TestFunctions.WriteAndReadDatabaseAsync(adapterType,
-                connectionString, writeCount, readCount, maxThreadCount, logger);
+                connectionString, writeCount, readCount, maxThreadCount, logger, tableName);
 
             ViewBag.StatusMessage = "Start Testing...";
 

@@ -17,12 +17,14 @@ namespace Core.TestingDbAdapters
 CONSTRAINT [PK_Testing] PRIMARY KEY ([Id])
 );", TestingConstants.TableName);
 
-        protected static readonly string DropSql =
-            string.Format(
+        protected static string CreateDropSql(string tableName)
+        {
+            return string.Format(
 @"if exists (select * from sysobjects where id =
 object_id(N'[dbo].[{0}]') and
     OBJECTPROPERTY(id, N'IsUserTable') = 1)
-DROP TABLE [dbo].[{0}];", TestingConstants.TableName);
+DROP TABLE [dbo].[{0}];", tableName);
+        }
 
         protected static readonly string InsertSql =
             string.Format("INSERT INTO {0} VALUES (@Name, @TreadId, @AddTime)", TestingConstants.TableName);
@@ -35,7 +37,7 @@ DROP TABLE [dbo].[{0}];", TestingConstants.TableName);
             ConnectionString = connectionString;
         }
 
-        public virtual void DropAndCreateTable()
+        public virtual void DropAndCreateTable(string tableName)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -43,7 +45,7 @@ DROP TABLE [dbo].[{0}];", TestingConstants.TableName);
 
                 using (var command = conn.CreateCommand())
                 {
-                    command.CommandText = DropSql;
+                    command.CommandText = CreateDropSql(tableName);
                     command.ExecuteNonQuery();
                 }
 

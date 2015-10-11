@@ -15,10 +15,11 @@ namespace Core
             int writeCount,
             int readCount,
             int maxThreadCount,
-            ITestingLogAdapter logger)
+            ITestingLogAdapter logger,
+            string tableName)
         {
             var task = Task.Factory.StartNew(() =>
-                WriteAndReadDatabase(adapterType, connectionString, writeCount, readCount, maxThreadCount, logger));
+                WriteAndReadDatabase(adapterType, connectionString, writeCount, readCount, maxThreadCount, logger, tableName));
 
             task.ConfigureAwait(false);
 
@@ -35,7 +36,8 @@ namespace Core
             int writeCount,
             int readCount,
             int maxThreadCount,
-            ITestingLogAdapter logger)
+            ITestingLogAdapter logger,
+            string tableName)
         {
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -44,7 +46,7 @@ namespace Core
 
             var adapter = TestingDbAdapterFactory.Create(adapterType, connectionString, writeCount);
 
-            adapter.DropAndCreateTable();
+            adapter.DropAndCreateTable(tableName);
 
             logger.Info("Start connectionString: " + connectionString);
 
