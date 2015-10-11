@@ -62,7 +62,7 @@ namespace Core
                     Name = TestingConstants.RedisKeyPrefix + i,
                     TreadId = threadId,
                     AddTime = DateTime.Now
-                });
+                }, tableName);
             });
 
             stopwatch.Stop();
@@ -76,7 +76,7 @@ namespace Core
                 MaxDegreeOfParallelism = maxThreadCount
             }, i =>
             {
-                var a = adapter.Select();
+                var a = adapter.Select(tableName);
             });
 
             stopwatch.Stop();

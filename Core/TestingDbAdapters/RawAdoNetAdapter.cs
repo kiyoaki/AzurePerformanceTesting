@@ -9,7 +9,7 @@ namespace Core.TestingDbAdapters
         {
         }
 
-        public override void Insert(Testing entity)
+        public override void Insert(Testing entity, string tableName)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -17,7 +17,7 @@ namespace Core.TestingDbAdapters
 
                 using (var command = conn.CreateCommand())
                 {
-                    command.CommandText = InsertSql;
+                    command.CommandText = InsertSql(tableName);
                     command.Parameters.AddWithValue("@Name", entity.Name);
                     command.Parameters.AddWithValue("@TreadId", entity.TreadId);
                     command.Parameters.AddWithValue("@AddTime", entity.AddTime);

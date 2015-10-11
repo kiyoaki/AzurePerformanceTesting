@@ -56,14 +56,20 @@
     <div class="form-group">
         <span class="control-label">LogType</span>
         <div>
-            @Html.DropDownList("logAdapterType", Enum.GetValues(typeof(TestingLogAdapterType))
+            @Html.DropDownList("logAdapterType", Enum.GetValues(typeof (TestingLogAdapterType))
                 .Cast<TestingLogAdapterType>()
                 .Select(x => new SelectListItem
                 {
                     Text = x.ToString(),
-                    Value = ((int)x).ToString()
+                    Value = ((int) x).ToString()
                 }),
-                new { @class = "form-control" })
+                new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="control-label">TableName [Default:Testing. EntityFramework always use default]</span>
+        <div>
+            @Html.TextBox("tableName", null, new { @class = "form-control" })
         </div>
     </div>
     <button type="submit" class="btn btn-default" value="start" title="Start Testing">Start Testing</button>

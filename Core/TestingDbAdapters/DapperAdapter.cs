@@ -12,19 +12,19 @@ namespace Core.TestingDbAdapters
         {
         }
 
-        public override void Insert(Testing entity)
+        public override void Insert(Testing entity, string tableName)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
-                conn.Execute(InsertSql, entity);
+                conn.Execute(InsertSql(tableName), entity);
             }
         }
 
-        public override Testing Select()
+        public override Testing Select(string tableName)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
-                return conn.Query<Testing>(SelectSql, new { Id = new Random().Next(100) })
+                return conn.Query<Testing>(SelectSql(tableName), new { Id = new Random().Next(100) })
                     .FirstOrDefault();
             }
         }

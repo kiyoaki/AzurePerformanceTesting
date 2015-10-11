@@ -11,7 +11,7 @@ namespace Core.TestingDbAdapters
         {
         }
 
-        public override void Insert(Testing entity)
+        public override void Insert(Testing entity, string tableName)
         {
             using (var db = new Entities(ConnectionString))
             {
@@ -20,7 +20,7 @@ namespace Core.TestingDbAdapters
             }
         }
 
-        public override Testing Select()
+        public override Testing Select(string tableName)
         {
             using (var db = new Entities(ConnectionString))
             {

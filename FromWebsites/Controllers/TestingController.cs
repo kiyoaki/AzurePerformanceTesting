@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Text.RegularExpressions;
+using System.Web.Mvc;
 using Core;
 using Core.TestingDbAdapters;
 using Core.TestingLogAdapters;
@@ -8,6 +9,8 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
     [RequireHttps]
     public class TestingController : Controller
     {
+        private static readonly Regex Alphanumeric = new Regex("^[a-zA-Z0-9]*$", RegexOptions.Compiled);
+
         // GET: Testing
         [HttpGet]
         public ActionResult Index()
@@ -30,6 +33,11 @@ namespace AzureSqlDatabaseStressTestTool.Controllers
             {
                 ViewBag.StatusMessage = "Please input ConnectionString";
                 return View("Index");
+            }
+
+            if (string.IsNullOrWhiteSpace(tableName) || !Alphanumeric.IsMatch(tableName))
+            {
+                tableName = TestingConstants.TableName;
             }
 
             var logger = TestingLogAdapterFactory.Create(logAdapterType);

@@ -22,13 +22,13 @@ namespace Core.TestingDbAdapters
         {
         }
 
-        public override void Insert(Testing entity)
+        public override void Insert(Testing entity, string tableName)
         {
             entity.Id = _counter++;
 
             var db = _connection.GetDatabase();
             var json = Serializer.Serialize(entity);
-            var key = TestingConstants.RedisKeyPrefix + entity.Id;
+            var key = tableName + "-" + entity.Id;
             db.StringSet(key, json);
 
             if (_counter >= _writeCount)
@@ -37,11 +37,11 @@ namespace Core.TestingDbAdapters
             }
         }
 
-        public override Testing Select()
+        public override Testing Select(string tableName)
         {
             var db = _connection.GetDatabase();
             var id = new Random().Next(100);
-            var key = TestingConstants.RedisKeyPrefix + id;
+            var key = "tableName" + "-" + id;
             var json = (string)db.StringGet(key);
             return string.IsNullOrEmpty(json) ? null : Serializer.Deserialize<Testing>(json);
         }

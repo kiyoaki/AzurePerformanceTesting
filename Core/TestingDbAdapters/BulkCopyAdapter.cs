@@ -18,7 +18,7 @@ namespace Core.TestingDbAdapters
             _writeCount = writeCount;
         }
 
-        public override void Insert(Testing entity)
+        public override void Insert(Testing entity, string tableName)
         {
             _bag.Add(entity);
 
@@ -27,7 +27,7 @@ namespace Core.TestingDbAdapters
             using (var conn = new SqlConnection(_connectionString))
             using (var bulkCopy = new SqlBulkCopy(conn))
             {
-                bulkCopy.DestinationTableName = TestingConstants.TableName;
+                bulkCopy.DestinationTableName = tableName;
                 conn.Open();
 
                 var dataTable = new DataTable();

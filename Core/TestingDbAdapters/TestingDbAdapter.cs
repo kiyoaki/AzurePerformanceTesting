@@ -7,17 +7,19 @@ namespace Core.TestingDbAdapters
     {
         protected readonly string ConnectionString;
 
-        protected static readonly string CreateTableSql =
-            string.Format(
-@"CREATE TABLE [dbo].[{0}] (
+        protected static string CreateTableSql(string tableName)
+        {
+            return string.Format(
+                @"CREATE TABLE [dbo].[{0}] (
 [Id]      INT            IDENTITY (1, 1) NOT NULL,
 [Name]    NVARCHAR (MAX) NULL,
 [TreadId] INT            NOT NULL,
 [AddTime] DATETIME       NOT NULL, 
-CONSTRAINT [PK_Testing] PRIMARY KEY ([Id])
-);", TestingConstants.TableName);
+CONSTRAINT [PK_{0}] PRIMARY KEY ([Id])
+);", tableName);
+        }
 
-        protected static string CreateDropSql(string tableName)
+        protected static string DropSql(string tableName)
         {
             return string.Format(
 @"if exists (select * from sysobjects where id =
@@ -26,11 +28,15 @@ object_id(N'[dbo].[{0}]') and
 DROP TABLE [dbo].[{0}];", tableName);
         }
 
-        protected static readonly string InsertSql =
-            string.Format("INSERT INTO {0} VALUES (@Name, @TreadId, @AddTime)", TestingConstants.TableName);
+        protected static string InsertSql(string tableName)
+        {
+            return string.Format("INSERT INTO {0} VALUES (@Name, @TreadId, @AddTime)", tableName);
+        }
 
-        protected static readonly string SelectSql =
-            string.Format("SELECT * FROM {0} WHERE Id = @Id", TestingConstants.TableName);
+        protected static string SelectSql(string tableName)
+        {
+            return string.Format("SELECT * FROM {0} WHERE Id = @Id", tableName);
+        }
 
         protected TestingDbAdapter(string connectionString)
         {
@@ -45,21 +51,21 @@ DROP TABLE [dbo].[{0}];", tableName);
 
                 using (var command = conn.CreateCommand())
                 {
-                    command.CommandText = CreateDropSql(tableName);
+                    command.CommandText = DropSql(tableName);
                     command.ExecuteNonQuery();
                 }
 
                 using (var command = conn.CreateCommand())
                 {
-                    command.CommandText = CreateTableSql;
+                    command.CommandText = CreateTableSql(tableName);
                     command.ExecuteNonQuery();
                 }
             }
         }
 
-        public abstract void Insert(Testing entity);
+        public abstract void Insert(Testing entity, string tableName);
 
-        public virtual Testing Select()
+        public virtual Testing Select(string tableName)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -68,7 +74,7 @@ DROP TABLE [dbo].[{0}];", tableName);
                 using (var command = conn.CreateCommand())
                 {
                     var id = new Random().Next(100);
-                    command.CommandText = SelectSql;
+                    command.CommandText = SelectSql(tableName);
                     command.Parameters.AddWithValue("@Id", id);
                     using (var reader = command.ExecuteReader())
                     {
