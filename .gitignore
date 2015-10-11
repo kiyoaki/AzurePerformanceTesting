@@ -183,3 +183,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 webjob-publish-settings.json
+
+.vs/
